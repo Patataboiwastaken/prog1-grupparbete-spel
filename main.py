@@ -2,7 +2,6 @@ import items
 import game_map
 import equipment
 import text
-import stats
 class player:
     map_icon = "P"
     name = "player"
@@ -19,7 +18,7 @@ class player:
     hp = 10
     dmg = 1
     inventory = []
-    consumeables =[]
+    consumeables =[items.bomb]
     head = items.nothing
     body = items.nothing
     legs = items.nothing
@@ -32,13 +31,15 @@ if __name__ == "__main__":
     while True:
         game_map.print_map(karta)
 
-        action = input("input: ")
+        action = input("input: ").lower()
         if action == "w" or action == "a" or action == "s" or action == "d":
             karta, player = game_map.move(karta, action, player)
         if action == "help":
             text.controls()
-        if action == "i":
+        if action == "e":
             equipment.inventory(player)
+        if action == "c":
+            equipment.consumeables(player)
         if action == "l":
             text.legend()
    

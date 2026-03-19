@@ -29,8 +29,8 @@ a = move left
 d = move right
 s = move down
 l = legend(explains the symbols on the map)
-i = inventory
-c = view character stats
+e = equipment
+c = consumables
 """)
     input("press enter to continue")
 

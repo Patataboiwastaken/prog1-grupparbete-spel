@@ -1,3 +1,10 @@
+def consumeables(player):
+    print("Your consumeables:")
+    counter = 0
+    for item in player.consumeables:
+        print(f"{counter} {item.name}: {item.description}")
+    input("Press enter to continue")
+    print("--------------------------------")
 
 def equipped(player):
     equipment = [player.head, player.body, player.legs, player.right_hand, player.left_hand]

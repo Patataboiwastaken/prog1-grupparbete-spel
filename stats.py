@@ -4,6 +4,15 @@ class wall:
     map_icon = "#"
     entity_type = "wall"
 
+class fake_wall:
+    name = "fake wall"
+    map_icon = "#"
+    entity_type = "enemy"
+    hp = 10
+    atk = 0
+    dmg = 0
+    loot = []
+
 class empty_tile:
     name = "empty_tile"
     map_icon = " "
@@ -26,6 +35,10 @@ class chest2:
 
 class chest3:
     name = "3"
+    map_icon = "S"
+    entity_type = "chest"
+class chest4:
+    name = "4"
     map_icon = "S"
     entity_type = "chest"
 
@@ -82,6 +95,7 @@ class troll:
     atk = 5
     dmg = 0.75
     loot = []
+
 class lich:
     name = "lich"
     map_icon = "l"
@@ -98,4 +112,4 @@ class player_placeholder:
     entity_type = "misc"
 
 #lista för att map_creator ska fungera
-list_of_entity_types = [wall, empty_tile, goblin, orc, zombie, skeleton, rat, troll, player_placeholder, trapdoor, chest1, chest2, chest3, lich]
+list_of_entity_types = [wall, empty_tile, goblin, orc, zombie, skeleton, rat, troll, player_placeholder, trapdoor, chest1, chest2, chest3, lich, fake_wall, chest4]
