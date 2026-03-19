@@ -70,7 +70,7 @@ def inventory(player):
 
             if slot == "hand":
                 inp = ""
-                while not (inp == "r" or "l"):
+                while not (inp == "r" or inp == "l"):
                     print("Enter r to equip in right hand or l to equip in left hand:")
                     inp = input()
                     if inp == "l":

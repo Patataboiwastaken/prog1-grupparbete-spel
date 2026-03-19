@@ -18,7 +18,8 @@ class player:
     atk = 0
     hp = 10
     dmg = 1
-    inventory=[]
+    inventory = []
+    consumeables =[]
     head = items.nothing
     body = items.nothing
     legs = items.nothing
