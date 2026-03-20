@@ -18,7 +18,7 @@ class player:
     hp = 10
     dmg = 1
     inventory = []
-    consumeables =[items.bomb]
+    consumeables =[]
     head = items.nothing
     body = items.nothing
     legs = items.nothing

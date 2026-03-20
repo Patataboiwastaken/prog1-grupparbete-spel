@@ -11,7 +11,6 @@ def use_item(item, monster, player, enemy_hp):
         player.atk += 10
     if item.name == "fortitude potion":
         player.dmg *= 0.5
-    print(monster)
     return(monster, player, enemy_hp)
 
 def start_battle(monster, player):
@@ -24,7 +23,7 @@ def start_battle(monster, player):
         #välj vad du ska göra
         print(f"your have: {player.hp} health")
         print(f"the monster has: {int(enemy_hp)} health")
-        player_action=input("what do you do?\n1:attack \n2:defend \n3:item(WIP) \n4:flee\n")
+        player_action=input("what do you do?\n1:attack \n2:defend \n3:item \n4:flee\n")
 
         if player_action=="attack" or player_action=="1":
             enemy_hp -= monster.dmg*player.atk    
@@ -59,8 +58,11 @@ def start_battle(monster, player):
                 except TypeError:
                     print("Error: Not a number")
                 
-
                 print("--------------------------")
+                if enemy_hp <= 0:
+                    done_with_items = True
+                    print("The monster dies")
+                    input("Click enter to continue")
         
         #fiende anfaller ifall inte använde item
         if not(player_action=="item" or player_action=="3"):
