@@ -5,13 +5,46 @@ from text import death
 def use_item(item, monster, player, enemy_hp):
     if item.name == "bomb":
         enemy_hp -= 10
-    if item.name == "health potion":
+    elif item.name == "health potion":
         player.hp += 10
-    if item.name == "strenght potion":
+    elif item.name == "strenght potion":
         player.atk += 10
-    if item.name == "fortitude potion":
+    elif item.name == "fortitude potion":
         player.dmg *= 0.5
     return(monster, player, enemy_hp)
+
+def item_screen(monster, player, enemy_hp):
+    done_with_items = False
+    while not done_with_items:
+        counter = 0
+        print("Your items:")
+        for x in player.consumeables:
+            print(f"{counter}. {x.name}")
+            print(f"    {x.description}")
+            counter += 1
+        print("")
+        print("To use item: enter their number")
+        print("To continue the fight: click enter")
+        used_item=input(f"input: ")
+        
+        try: 
+            used_item = int(used_item)
+            used_item = player.consumeables.pop(used_item)
+            monster, player, enemy_hp = use_item(used_item, monster, player, enemy_hp)
+        except ValueError:
+            if used_item == "":
+                done_with_items = True
+            else:
+                print("Error: You have no consumeable with that number")
+        except TypeError:
+            print("Error: Not a number")
+        
+        print("--------------------------")
+        if enemy_hp <= 0:
+            done_with_items = True
+            print("The monster dies")
+            input("Click enter to continue")
+    return(monster. player, enemy_hp)
 
 def start_battle(monster, player):
     #sparar i variabel så att det inte förs över mellan strider
@@ -32,37 +65,7 @@ def start_battle(monster, player):
             player.dmg *= 0.5
         
         if player_action=="item" or player_action=="3":
-            done_with_items = False
-            while not done_with_items:
-                counter = 0
-                print("Your items:")
-                for x in player.consumeables:
-                    print(f"{counter}. {x.name}")
-                    print(f"    {x.description}")
-                    counter += 1
-                print("")
-                print("To use item: enter their number")
-                print("To continue the fight: click enter")
-                used_item=input(f"input: ")
-                
-                try: 
-                    used_item = int(used_item)
-                    used_item = player.consumeables.pop(used_item)
-                    #player.consumeables[used_item]
-                    monster, player, enemy_hp = use_item(used_item, monster, player, enemy_hp)
-                except ValueError:
-                    if used_item == "":
-                        done_with_items = True
-                    else:
-                        print("Error: You have no consumeable with that number")
-                except TypeError:
-                    print("Error: Not a number")
-                
-                print("--------------------------")
-                if enemy_hp <= 0:
-                    done_with_items = True
-                    print("The monster dies")
-                    input("Click enter to continue")
+            item_screen(monster, player, enemy_hp)
         
         #fiende anfaller ifall inte använde item
         if not(player_action=="item" or player_action=="3"):

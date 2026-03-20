@@ -11,7 +11,10 @@ map_index = 0
 
 
 def print_map(karta):
+    #clearar konsolen
     print("\033[H\033[J", end="")
+
+    #skriver ut kartan
     for y in range(len(karta)):
         print("")
         for x in range(len(karta[y])):
@@ -26,23 +29,23 @@ def check_collision(karta, delta_x, delta_y, player):
     check_y = player.y + delta_y
     entity = karta[check_y][check_x]
 
+    if entity.name == "wall":
+        proceed = False
+
     if entity.name == "lich":
         print("You approach your final battle with the lich, the master of this dungeon")
         proceed, player = start_battle(karta[check_y][check_x], player)
         print("Congratulations! you beat the game :)")
         exit()
 
-    #om det är en fiende: starta en fight
     if entity.entity_type == "enemy":
         proceed, player = start_battle(karta[check_y][check_x], player)
 
-    #om det är en fallucka: gå till nästa våning
     if entity.name == "trapdoor":
         karta, player = move_to_next_floor(player)
         print("You go down the stairs to the next floor")
         input("Press enter to continue")
 
-    #Om det är en kista: skaffa en item
     if entity.entity_type == "chest":
         number_of_items = 1
         if entity.name == "1":
@@ -68,6 +71,7 @@ def check_collision(karta, delta_x, delta_y, player):
 def move(karta, riktning, player):
     delta_x = 0
     delta_y = 0
+
     if riktning == "w":
         delta_y = -1
         delta_x = 0
@@ -80,12 +84,15 @@ def move(karta, riktning, player):
     if riktning == "d":
         delta_y = 0
         delta_x = 1
+
     proceed, karta, player = check_collision(karta, delta_x, delta_y, player)
-    if proceed and not karta[player.y+delta_y][player.x+delta_x].entity_type == "wall":
+
+    if proceed:
         karta[player.y+delta_y][player.x+delta_x] = player
         karta[player.y][player.x] = stats.empty_tile
         player.y += delta_y
         player.x += delta_x
+        
     return(karta, player)
 
 def move_to_next_floor(player):

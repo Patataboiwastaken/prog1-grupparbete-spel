@@ -32,14 +32,19 @@ if __name__ == "__main__":
         game_map.print_map(karta)
 
         action = input("input: ").lower()
+
         if action == "w" or action == "a" or action == "s" or action == "d":
             karta, player = game_map.move(karta, action, player)
+
         if action == "help":
             text.controls()
+
         if action == "e":
             equipment.inventory(player)
+
         if action == "c":
             equipment.consumeables(player)
+            
         if action == "l":
             text.legend()
    

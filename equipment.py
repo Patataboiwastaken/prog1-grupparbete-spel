@@ -65,12 +65,15 @@ def inventory(player):
         elif not inp == "e":
             equipment = player.inventory.pop(inp)
             slot = equipment.slot
+
             if slot == "head":
                 unequipped_item = player.head
                 player.head = equipment
+
             if slot == "body":
                 unequipped_item = player.body
                 player.body = equipment
+
             if slot == "legs":
                 unequipped_item = player.legs
                 player.legs = equipment
@@ -80,9 +83,11 @@ def inventory(player):
                 while not (inp == "r" or inp == "l"):
                     print("Enter r to equip in right hand or l to equip in left hand:")
                     inp = input()
+
                     if inp == "l":
                         unequipped_item = player.left_hand
                         player.left_hand = equipment
+                        
                     if inp == "r":
                         unequipped_item = player.right_hand
                         player.right_hand = equipment
